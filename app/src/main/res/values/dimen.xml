@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Navigation bar -->
+    <dimen name="height_nav_image">60dp</dimen>
+    <dimen name="width_nav_image">60dp</dimen>
+    <dimen name="margin_top_nav_image">12dp</dimen>
+    <dimen name="margin_left_nav_image">12dp</dimen>
+
+    <dimen name="margin_top_nav_title">12dp</dimen>
+    <dimen name="margin_left_nav_title">12dp</dimen>
+    <dimen name="nav_title_font_size">20sp</dimen>
+
+</resources>

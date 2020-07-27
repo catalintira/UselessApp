@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item
+            android:icon="@color/colorAccent"
+            android:title="Count Words"/>
+
+        <item
+            android:icon="@color/colorPrimary"
+            android:title="Get Avg of Numbers"/>
+
+        <item
+            android:icon="@color/colorPrimaryDark"
+            android:title="Download stuff"/>
+
+    </group>
+
+</menu>
