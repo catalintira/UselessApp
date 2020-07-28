@@ -11,4 +11,15 @@
     <dimen name="margin_left_nav_title">12dp</dimen>
     <dimen name="nav_title_font_size">20sp</dimen>
 
+    <!-- Word search view -->
+    <dimen name="margin_top_edit_text">12dp</dimen>
+    <dimen name="margin_horizontal_edit_text">12dp</dimen>
+    <dimen name="margin_top_rec_view">12dp</dimen>
+    <dimen name="margin_horizontal_rec_view">16dp</dimen>
+
+    <!-- Word search Recycler view -->
+    <dimen name="margin_top_item_text">12dp</dimen>
+    <dimen name="margin_bot_item_text">12dp</dimen>
+    <dimen name="margin_horizontal_item_text">12dp</dimen>
+
 </resources>

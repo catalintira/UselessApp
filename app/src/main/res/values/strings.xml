@@ -4,5 +4,17 @@
 
     <!-- Navigation bar -->
     <string name="nav_title">Useless App</string>
+    <string name="nav_search_item">Count Words</string>
+    <string name="nav_get_average">Get Avg of Numbers</string>
+    <string name="nav_download">Download stuff</string>
+
+    <!-- Welcome fragment -->
+    <string name="welcome_fragment_text">Welcome to the useless app!</string>
+
+
+
+
+
+
 
 </resources>

@@ -3,16 +3,19 @@
 
     <group>
         <item
+            android:id="@+id/item_search_word"
             android:icon="@color/colorAccent"
-            android:title="Count Words"/>
+            android:title="@string/nav_search_item"/>
 
         <item
+            android:id="@+id/item_get_average"
             android:icon="@color/colorPrimary"
-            android:title="Get Avg of Numbers"/>
+            android:title="@string/nav_get_average"/>
 
         <item
+            android:id="@+id/item_download"
             android:icon="@color/colorPrimaryDark"
-            android:title="Download stuff"/>
+            android:title="@string/nav_download"/>
 
     </group>
 

@@ -2,14 +2,21 @@ package com.garmin.android.uselessapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import com.garmin.android.uselessapplication.fragment.WelcomeFragment
 import com.google.android.material.navigation.NavigationView
+import androidx.lifecycle.ViewModelProviders
+import com.garmin.android.uselessapplication.fragment.SearchWordFragment
+import com.garmin.android.uselessapplication.repository.InternalStorageRepository
+import com.garmin.android.uselessapplication.viewmodel.StorageViewModel
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -23,12 +30,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
 
         initDrawer()
-
-
+        setFragment(WelcomeFragment.newInstance())
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        Toast.makeText(this, "AI SELECTAT CEVA", Toast.LENGTH_SHORT).show()
+        when (item.itemId) {
+            R.id.item_search_word -> setFragment(SearchWordFragment.newInstance())
+        }
+
         mDrawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
@@ -40,7 +49,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         setSupportActionBar(mToolbar)
 
-        val toogle = ActionBarDrawerToggle(
+        ActionBarDrawerToggle(
             this,
             mDrawerLayout,
             mToolbar,
@@ -51,6 +60,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             it.syncState()
             mNavView.setNavigationItemSelectedListener(this@MainActivity)
         }
+    }
 
+    private fun setFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.content_frame, fragment)
+            .commit()
     }
 }
