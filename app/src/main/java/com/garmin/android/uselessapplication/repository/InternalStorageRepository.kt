@@ -6,12 +6,10 @@ import com.garmin.android.uselessapplication.model.DataFile
 import java.io.File
 
 class InternalStorageRepository {
-
     private lateinit var mContext: Context
 
     fun initializeData() {
-        if( !File(FILE_NAME).exists() ) {
-            Log.i(LOG_TAG, LOG_NOT_EXISTENT_MESSAGE)
+        if (!File(FILE_NAME).exists()) {
             val textToWrite =
                 mContext
                     .assets
@@ -33,7 +31,8 @@ class InternalStorageRepository {
         return DataFile(FILE_NAME, content)
     }
 
-    fun setContext(context: Context) = let {this.mContext = context }
+    fun setContext(context: Context) =
+        let {this.mContext = context }
 
     companion object {
         const val SOURCE_FILE_NAME = "data_source.txt"

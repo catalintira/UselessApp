@@ -10,11 +10,8 @@
 
     <!-- Welcome fragment -->
     <string name="welcome_fragment_text">Welcome to the useless app!</string>
-
-
-
-
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -19,7 +19,6 @@ import kotlinx.android.synthetic.main.fragment_search_word.view.*
 
 
 class SearchWordFragment : Fragment(), TextWatcher {
-
     private lateinit var mViewModel: StorageViewModel
     private lateinit var mAdapter: FilesAdapter
 
@@ -54,7 +53,14 @@ class SearchWordFragment : Fragment(), TextWatcher {
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        // TODO: FILTER ITEMS IN RECYCLER VIEW
+        if (s.toString().isEmpty()) {
+            mAdapter.dataChanged(mViewModel.mFileList.value ?: listOf())
+        } else {
+            mAdapter.dataChanged(mViewModel.mFileList.value?.map {
+                it.copy()
+                it.mapToCount(s.toString())
+            } ?: listOf())
+        }
     }
 
     companion object {

@@ -17,6 +17,11 @@
             android:icon="@color/colorPrimaryDark"
             android:title="@string/nav_download"/>
 
+        <item
+            android:id="@+id/item_dummy"
+            android:icon="@color/colorPrimary"
+            android:title="Test Download"/>
+
     </group>
 
 </menu>

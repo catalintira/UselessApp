@@ -5,7 +5,6 @@ import com.garmin.android.uselessapplication.model.DataFile
 import com.garmin.android.uselessapplication.repository.InternalStorageRepository.Companion.SOURCE_FILE_NAME
 
 class SharedPreferencesRepository {
-
     private lateinit var mContext: Context
 
     fun initializeData() {
@@ -28,12 +27,13 @@ class SharedPreferencesRepository {
         return DataFile(FILE_KEY, text)
     }
 
-    fun setContext(context: Context) = let { mContext = context }
+    fun setContext(context: Context) =
+        let { mContext = context }
 
     companion object {
         private const val SHARED_PREF_KEY = "DATA_FILES"
         private const val FILE_KEY = "DATA_KEY"
         private const val DEFAULT_FILE_TEXT = "FILE COULD NOT BE FETCHED"
-        private const val TEXT_DISTINCTION = "1000"
+        private const val TEXT_DISTINCTION = " 1000"
     }
 }

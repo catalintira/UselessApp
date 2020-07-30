@@ -3,16 +3,11 @@ package com.garmin.android.uselessapplication.repository
 import android.content.Context
 import android.net.Uri
 import android.os.Environment
-import android.util.Log
-import androidx.core.net.toUri
+import com.garmin.android.uselessapplication.model.DataFile
 import com.garmin.android.uselessapplication.repository.InternalStorageRepository.Companion.SOURCE_FILE_NAME
-import java.io.File
-import java.io.FileNotFoundException
-import java.io.FileOutputStream
-import java.io.IOException
+import java.io.*
 
 class SharedStorageRepository {
-
     private lateinit var mContext: Context
 
     fun initializeData() {
@@ -22,11 +17,16 @@ class SharedStorageRepository {
                 .bufferedReader()
                 .use { it.readText() } + TEXT_DISTINCTION
 
-        val dir = File(ROOT.absolutePath + RELATIVE_PATH).apply {
+        val dir = File(mContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)?.toString() + RELATIVE_PATH).apply {
+            setReadable(true)
+            setWritable(true)
             mkdirs()
         }
+
         val file = File(dir, FILE_NAME).apply {
-            if (exists()) {
+            setReadable(true)
+            setWritable(true)
+            if (!exists()) {
                 createNewFile()
             }
         }
@@ -46,13 +46,28 @@ class SharedStorageRepository {
 
     }
 
+    fun getSharedStorageFile(): DataFile {
+        val dir = File(mContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)?.toString() + RELATIVE_PATH)
+        val file = File(dir, FILE_NAME)
+        val text = mContext.contentResolver.openFileDescriptor(Uri.fromFile(file), "r")
+             .use {
+                 FileInputStream(it?.fileDescriptor).use { fis ->
+                     fis.bufferedReader().useLines {lines ->
+                         lines.fold("") { some, text ->
+                             "$some\n$text"
+                         }
+                     }
+                 }
+             }
+        return DataFile(FILE_NAME, text)
+    }
 
-    fun setContext(context: Context) = let { mContext = context }
+    fun setContext(context: Context) =
+        let { mContext = context }
 
     companion object {
-        private val ROOT = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
         private const val RELATIVE_PATH = "/data_files"
         private const val FILE_NAME = "data_2.txt"
-        private const val TEXT_DISTINCTION = "2000"
+        private const val TEXT_DISTINCTION = " 2000"
     }
 }

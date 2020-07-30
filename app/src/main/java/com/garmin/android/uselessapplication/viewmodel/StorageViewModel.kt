@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.garmin.android.uselessapplication.model.DataFile
+import com.garmin.android.uselessapplication.model.StatisticsDataFile
 import com.garmin.android.uselessapplication.repository.InternalStorageRepository
 import com.garmin.android.uselessapplication.repository.SharedPreferencesRepository
 import com.garmin.android.uselessapplication.repository.SharedStorageRepository
@@ -29,7 +30,13 @@ class StorageViewModel(private val app: Application) : AndroidViewModel(app) {
     fun getInternalFiles() {
         val listOfFiles = ArrayList<DataFile>()
         listOfFiles.add(internalStorageRepository.genInternalFile())
+        listOfFiles.add(sharedStorageRepository.getSharedStorageFile())
         listOfFiles.add(sharedPreferencesRepository.getSharedPrefFile())
         mFileList.postValue(listOfFiles)
     }
+
+    fun getStatisticalFiles() =
+        mFileList.value?.map {
+            StatisticsDataFile.fromDataFile(it)
+        }
 }
