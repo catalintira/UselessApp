@@ -1,19 +1,29 @@
 package com.garmin.android.uselessapplication.repository
 
 import android.content.Context
+import com.garmin.android.uselessapplication.manager.DummyTextManager
+import com.garmin.android.uselessapplication.manager.TextConcatenationManager
 import com.garmin.android.uselessapplication.model.DataFile
-import com.garmin.android.uselessapplication.repository.InternalStorageRepository.Companion.SOURCE_FILE_NAME
 
 class SharedPreferencesRepository {
     private lateinit var mContext: Context
 
-    fun initializeData() {
-        val textToWrite =
-            mContext
-                .assets
-                .open(SOURCE_FILE_NAME)
-                .bufferedReader()
-                .use { it.readText() } + TEXT_DISTINCTION
+    fun initializeData() =
+        setText(DummyTextManager.getText(mContext) + TEXT_DISTINCTION)
+
+
+    fun getSharedPrefFile(): DataFile =
+        DataFile(FILE_KEY, getText())
+
+    fun insertText(textToInsert: String) {
+        val existentText = getText()
+        setText(TextConcatenationManager.concatenateStrings(existentText, textToInsert))
+    }
+
+    fun setContext(context: Context) =
+        let { mContext = context }
+
+    private fun setText(textToWrite: String) {
         val sharedPref = mContext.getSharedPreferences(SHARED_PREF_KEY, Context.MODE_PRIVATE)
         with(sharedPref.edit()) {
             putString(FILE_KEY, textToWrite)
@@ -21,14 +31,9 @@ class SharedPreferencesRepository {
         }
     }
 
-    fun getSharedPrefFile(): DataFile {
-        val text = mContext.getSharedPreferences(SHARED_PREF_KEY, Context.MODE_PRIVATE)
+    private fun getText() =
+        mContext.getSharedPreferences(SHARED_PREF_KEY, Context.MODE_PRIVATE)
             .getString(FILE_KEY, DEFAULT_FILE_TEXT) ?: DEFAULT_FILE_TEXT
-        return DataFile(FILE_KEY, text)
-    }
-
-    fun setContext(context: Context) =
-        let { mContext = context }
 
     companion object {
         private const val SHARED_PREF_KEY = "DATA_FILES"

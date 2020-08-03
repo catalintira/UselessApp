@@ -10,8 +10,19 @@
 
     <!-- Welcome fragment -->
     <string name="welcome_fragment_text">Welcome to the useless app!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Floating button -->
+    <string name="description_floating_button">Add word into files</string>
+
+    <!-- Spinner -->
+    <string-array name="spinner_options">
+        <item>Internal Storage</item>
+        <item>External (Shared) Storage</item>
+        <item>Shared Preferences</item>
+    </string-array>
+
+    <!-- Insert word fragment -->
+    <string name="text_view_hint">Text to insert</string>
+    <string name="text_add_button">Add text</string>
 
 </resources>

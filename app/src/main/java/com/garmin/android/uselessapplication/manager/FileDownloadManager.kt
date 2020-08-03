@@ -34,7 +34,7 @@ class FileDownloadManager : BroadcastReceiver() {
         val downloadManagerQuery = DownloadManager.Query()
         downloadManagerQuery.setFilterById(downloadId)
         getDownloadManager(context).query(downloadManagerQuery)?.let { cursor ->
-            var reasonText: String? = null    // applicable only for STATUS_PAUSED & STATUS_FAILED
+            val reasonText: String?    // applicable only for STATUS_PAUSED & STATUS_FAILED
             if (cursor.moveToFirst()) {
                 val dmId = cursor.getLong(cursor.getColumnIndex(DownloadManager.COLUMN_ID))
                 val status = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS))

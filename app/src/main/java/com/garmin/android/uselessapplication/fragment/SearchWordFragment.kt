@@ -24,9 +24,9 @@ class SearchWordFragment : Fragment(), TextWatcher {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mViewModel = ViewModelProviders.of(this)
+        mViewModel = ViewModelProviders.of(requireActivity())
             .get(StorageViewModel::class.java)
-            .apply { setUp(); getInternalFiles() }
+            .apply { getInternalFiles() }
     }
 
     override fun onCreateView(

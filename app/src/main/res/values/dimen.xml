@@ -22,4 +22,15 @@
     <dimen name="margin_bot_item_text">12dp</dimen>
     <dimen name="margin_horizontal_item_text">12dp</dimen>
 
+    <!-- Spinner -->
+    <dimen name="height_spinner">30dp</dimen>
+    <dimen name="margin_top_spinner">12dp</dimen>
+    <dimen name="margin_bot_spinner">12dp</dimen>
+    <dimen name="margin_horizontal_spinner">12dp</dimen>
+
+    <!-- Insert word text view -->
+    <dimen name="margin_top_insert_text">12dp</dimen>
+    <dimen name="margin_bot_insert_text">12dp</dimen>
+    <dimen name="margin_horizontal_insert_text">12dp</dimen>
+
 </resources>

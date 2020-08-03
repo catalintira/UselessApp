@@ -18,6 +18,7 @@ class WelcomeFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = WelcomeFragment()
+        fun newInstance() =
+            WelcomeFragment()
     }
 }

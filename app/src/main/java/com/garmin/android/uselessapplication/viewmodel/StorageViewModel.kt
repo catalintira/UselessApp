@@ -10,28 +10,28 @@ import com.garmin.android.uselessapplication.repository.InternalStorageRepositor
 import com.garmin.android.uselessapplication.repository.SharedPreferencesRepository
 import com.garmin.android.uselessapplication.repository.SharedStorageRepository
 
-class StorageViewModel(private val app: Application) : AndroidViewModel(app) {
+class StorageViewModel(app: Application) : AndroidViewModel(app) {
 
     var mFileList: MutableLiveData<List<DataFile>> = MutableLiveData()
 
-    private val internalStorageRepository = InternalStorageRepository()
-    private val sharedStorageRepository = SharedStorageRepository()
-    private val sharedPreferencesRepository = SharedPreferencesRepository()
+    private val mInternalStorageRepository = InternalStorageRepository()
+    private val mSharedStorageRepository = SharedStorageRepository()
+    private val mSharedPreferencesRepository = SharedPreferencesRepository()
 
-    fun setUp() {
-        internalStorageRepository.setContext(app)
-        internalStorageRepository.initializeData()
-        sharedPreferencesRepository.setContext(app)
-        sharedPreferencesRepository.initializeData()
-        sharedStorageRepository.setContext(app)
-        sharedStorageRepository.initializeData()
+    init {
+        mInternalStorageRepository.setContext(app)
+        mInternalStorageRepository.initializeData()
+        mSharedPreferencesRepository.setContext(app)
+        mSharedPreferencesRepository.initializeData()
+        mSharedStorageRepository.setContext(app)
+        mSharedStorageRepository.initializeData()
     }
 
     fun getInternalFiles() {
         val listOfFiles = ArrayList<DataFile>()
-        listOfFiles.add(internalStorageRepository.genInternalFile())
-        listOfFiles.add(sharedStorageRepository.getSharedStorageFile())
-        listOfFiles.add(sharedPreferencesRepository.getSharedPrefFile())
+        listOfFiles.add(mInternalStorageRepository.genInternalFile())
+        listOfFiles.add(mSharedStorageRepository.getSharedStorageFile())
+        listOfFiles.add(mSharedPreferencesRepository.getSharedPrefFile())
         mFileList.postValue(listOfFiles)
     }
 
@@ -39,4 +39,16 @@ class StorageViewModel(private val app: Application) : AndroidViewModel(app) {
         mFileList.value?.map {
             StatisticsDataFile.fromDataFile(it)
         }
+
+    fun addTextInternal(text: String) =
+        mInternalStorageRepository.insertText(text)
+
+
+    fun addTextExternal(text: String) {
+        mSharedStorageRepository.insertText(text)
+    }
+
+    fun addTextSharedPreferences(text: String) {
+        mSharedPreferencesRepository.insertText(text)
+    }
 }

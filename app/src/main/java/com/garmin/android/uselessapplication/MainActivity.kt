@@ -10,11 +10,13 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.garmin.android.uselessapplication.fragment.InsertWordFragment
 import com.garmin.android.uselessapplication.fragment.WelcomeFragment
 import com.google.android.material.navigation.NavigationView
 import com.garmin.android.uselessapplication.fragment.SearchWordFragment
 import com.garmin.android.uselessapplication.fragment.StatisticsFragment
 import com.garmin.android.uselessapplication.manager.FileDownloadManager
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
 
         initDrawer()
+        initListeners()
         setFragment(WelcomeFragment.newInstance())
     }
 
@@ -59,6 +62,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             mDrawerLayout.addDrawerListener(it)
             it.syncState()
             mNavView.setNavigationItemSelectedListener(this@MainActivity)
+        }
+    }
+
+    private fun initListeners() {
+        floating_action_button.setOnClickListener {
+            setFragment(InsertWordFragment.newInstance())
         }
     }
 
